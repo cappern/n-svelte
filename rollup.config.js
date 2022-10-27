@@ -32,9 +32,9 @@ const indexTemplate = `<!--
 * Notus Svelte - v1.1.0 based on Tailwind Starter Kit by Creative Tim
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/notus-svelte
+* Product Page: https://www.creative-tim.com/product
 * Copyright 2021 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/notus-svelte/blob/main/LICENSE.md)
+* Licensed under MIT (https://github.com/creativetimofficial/blob/main/LICENSE.md)
 
 * Tailwind Starter Kit Page: https://www.creative-tim.com/learning-lab/tailwind-starter-kit/presentation
 
@@ -68,6 +68,12 @@ const indexTemplate = `<!--
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
     <script defer src="<<live-preview-link>>/build/bundle.js"></script>
+    <script>
+    if (process === "PRODUCTION") {
+      document.write('<script defer src="../uibuilder/uibuilder.iife.min.js"></script>')
+    }
+    </script>
+    
   </head>
 
   <body class="text-blueGray-700 antialiased">
@@ -87,19 +93,19 @@ if (production) {
     "./dist/index.html",
     indexTemplate
       .replace("<<process-env-status>>", "PRODUCTION: true")
-      .replace(/<<live-preview-link>>/g, "/notus-svelte")
+      .replace(/<<live-preview-link>>/g, "")
   );
   fs.writeFileSync(
     "./dist/200.html",
     indexTemplate
       .replace("<<process-env-status>>", "PRODUCTION: true")
-      .replace(/<<live-preview-link>>/g, "/notus-svelte")
+      .replace(/<<live-preview-link>>/g, "")
   );
   fs.writeFileSync(
     "./dist/404.html",
     indexTemplate
       .replace("<<process-env-status>>", "PRODUCTION: true")
-      .replace(/<<live-preview-link>>/g, "/notus-svelte")
+      .replace(/<<live-preview-link>>/g, "")
   );
 } else {
   fs.writeFileSync(
