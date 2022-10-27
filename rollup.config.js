@@ -11,6 +11,7 @@ import { terser } from "rollup-plugin-terser";
 import alias from "@rollup/plugin-alias";
 import fs from "fs";
 
+const uibDist = 'dist'
 const production = !process.env.ROLLUP_WATCH;
 
 // configure aliases for absolute imports
@@ -150,7 +151,7 @@ export default {
     sourcemap: true,
     format: "iife",
     name: "app",
-    file: "public/build/bundle.js",
+    file: `${uibDist}/build/bundle.js`
   },
   plugins: [
     svelte({
@@ -180,7 +181,7 @@ export default {
 
     // Watch the `public` directory and refresh the
     // browser on changes when not in production
-    !production && livereload("public"),
+    !production && livereload("dist"),
 
     // If we're building for production (npm run build
     // instead of npm run dev), minify
