@@ -8,10 +8,10 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "sirv public -s",
-    "build:tailwind": "tailwind build public/assets/styles/index.css -o public/assets/styles/tailwind.css",
-    "build:fontawesome": "mkdir -p public/assets/vendor/@fortawesome/fontawesome-free/webfonts && mkdir -p public/assets/vendor/@fortawesome/fontawesome-free/css && cp -a ./node_modules/@fortawesome/fontawesome-free/webfonts public/assets/vendor/@fortawesome/fontawesome-free/ && cp ./node_modules/@fortawesome/fontawesome-free/css/all.min.css public/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css",
-    "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && rm -rf public/build && npm install && npm run build:tailwind && npm run build:fontawesome && npm run dev"
+    "start": "sirv dist -s",
+    "build:tailwind": "tailwind build dist/assets/styles/index.css -o dist/assets/styles/tailwind.css",
+    "build:fontawesome": "mkdir -p dist/assets/vendor/@fortawesome/fontawesome-free/webfonts && mkdir -p dist/assets/vendor/@fortawesome/fontawesome-free/css && cp -a ./node_modules/@fortawesome/fontawesome-free/webfonts dist/assets/vendor/@fortawesome/fontawesome-free/ && cp ./node_modules/@fortawesome/fontawesome-free/css/all.min.css dist/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css",
+    "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && rm -rf dist/build && npm install && npm run build:tailwind && npm run build:fontawesome && npm run dev"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "17.1.0",
