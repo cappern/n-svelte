@@ -3,6 +3,8 @@ import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import livereload from "rollup-plugin-livereload";
 import { terser } from "rollup-plugin-terser";
+import sveltePreprocess from 'svelte-preprocess';
+import css from 'rollup-plugin-css-only';
 // library that helps you import in svelte with
 // absolute paths, instead of
 // import Component  from "../../../../components/Component.svelte";
@@ -82,38 +84,38 @@ const indexTemplate = `<!--
 
 if (production) {
   fs.writeFileSync(
-    "./public/index.html",
+    "./dist/index.html",
     indexTemplate
       .replace("<<process-env-status>>", "PRODUCTION: true")
       .replace(/<<live-preview-link>>/g, "/notus-svelte")
   );
   fs.writeFileSync(
-    "./public/200.html",
+    "./dist/200.html",
     indexTemplate
       .replace("<<process-env-status>>", "PRODUCTION: true")
       .replace(/<<live-preview-link>>/g, "/notus-svelte")
   );
   fs.writeFileSync(
-    "./public/404.html",
+    "./dist/404.html",
     indexTemplate
       .replace("<<process-env-status>>", "PRODUCTION: true")
       .replace(/<<live-preview-link>>/g, "/notus-svelte")
   );
 } else {
   fs.writeFileSync(
-    "./public/index.html",
+    "./dist/index.html",
     indexTemplate
       .replace("<<process-env-status>>", "")
       .replace(/<<live-preview-link>>/g, "")
   );
   fs.writeFileSync(
-    "./public/200.html",
+    "./dist/200.html",
     indexTemplate
       .replace("<<process-env-status>>", "")
       .replace(/<<live-preview-link>>/g, "")
   );
   fs.writeFileSync(
-    "./public/404.html",
+    "./dist/404.html",
     indexTemplate
       .replace("<<process-env-status>>", "")
       .replace(/<<live-preview-link>>/g, "")
@@ -130,10 +132,7 @@ function serve() {
   return {
     writeBundle() {
       if (server) return;
-      server = require("child_process").spawn(
-        "npm",
-        ["run", "start", "--", "--dev"],
-        {
+      server = require("child_process").spawn("npm", ["run", "start", "--", "--dev"], {
           stdio: ["ignore", "inherit", "inherit"],
           shell: true,
         }
@@ -156,14 +155,17 @@ export default {
   plugins: [
     svelte({
       // enable run-time checks when not in production
-      dev: !production,
+      compilerOptions: {
+				dev: !production,
+			},
       // we'll extract any component CSS out into
       // a separate file - better for performance
-      css: (css) => {
-        css.write("bundle.css");
-      },
+      preprocess: sveltePreprocess({
+				sourceMap: !production,
+				postcss: true,
+			}),
     }),
-
+    css({ output: 'bundle.css' }),
     // If you have external dependencies installed from
     // npm, you'll most likely need these plugins. In
     // some cases you'll need additional configuration -
@@ -179,7 +181,7 @@ export default {
     // the bundle has been generated
     !production && serve(),
 
-    // Watch the `public` directory and refresh the
+    // Watch the `dist` directory and refresh the
     // browser on changes when not in production
     !production && livereload("dist"),
 
