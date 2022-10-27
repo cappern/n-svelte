@@ -53,26 +53,23 @@ const indexTemplate = `<!--
 
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon.png" />
-    <link rel="stylesheet" href="/build/bundle.css" />
+    <link rel="stylesheet" href="./build/bundle.css" />
     <link
       rel="stylesheet"
-      href="/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css"
+      href="./assets/vendor/@fortawesome/fontawesome-free/css/all.min.css"
     />
-    <link rel="stylesheet" href="/assets/styles/tailwind.css" />
+    <link rel="stylesheet" href="./assets/styles/tailwind.css" />
     <title>Notus Svelte</title>
 
     <script>
       if (process === undefined) {
-        var process = { env: {<<process-env-status>>} };
+        var process = { env: {PRODUCTION: true} };
       }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
-    <script defer src="<<live-preview-link>>/build/bundle.js"></script>
-    <script>
-    if (process === "PRODUCTION") {
-      document.write('<script defer src="../uibuilder/uibuilder.iife.min.js"></script>')
-    }
-    </script>
+    <script defer src="./build/bundle.js"></script>
+    
+    <script defer src="../uibuilder/uibuilder.iife.min.js"></script>
     
   </head>
 
