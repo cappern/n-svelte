@@ -5,7 +5,7 @@
   import IndexNavbar from "components/Navbars/IndexNavbar.svelte";
   import Footer from "components/Footers/Footer.svelte";
 
-  const patternVue = "/assets/img/pattern_svelte.png";
+  const patternSvelte = "/assets/img/pattern_svelte.png";
   const componentBtn = "/assets/img/component-btn.png";
   const componentProfileCard = "/assets/img/component-profile-card.png";
   const componentInfoCard = "/assets/img/component-info-card.png";
@@ -17,6 +17,9 @@
   const profile = "/assets/img/profile.jpg";
   const landing = "/assets/img/landing.jpg";
   export let location;
+  //import {Uib, uibuilder} from '/assets/vendor/uibuilder.esm.min.js'
+
+  
 </script>
 
 <IndexNavbar />
@@ -61,7 +64,7 @@
 
   <img
     class="absolute top-0 b-auto right-0 pt-16 sm:w-6/12 -mt-48 sm:mt-0 w-10/12 max-h-860-px"
-    src="{patternVue}"
+    src="{patternSvelte}"
     alt="..."
   />
 </section>
